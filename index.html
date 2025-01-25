@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Creation - Prank</title>
+    <title>Account Creation - Zenoxhost</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -127,8 +127,14 @@
         passwordError.style.display = 'none';
         emailError.style.display = 'none';
 
+        // Show fake error every few seconds during the 2 hours
+        const fakeErrorInterval = setInterval(function() {
+            alert("Oops! Something went wrong. Please try again.");
+        }, 10000); // Fake error every 10 seconds
+
         // Simulate a 2-hour timer for account creation
         setTimeout(function() {
+            clearInterval(fakeErrorInterval); // Stop the fake errors
             loadingMessage.style.display = 'none'; // Hide loading message
             successMessage.style.display = 'block'; // Show success message
         }, 2 * 60 * 60 * 1000); // 2 hours (in milliseconds)
