@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Creation - Prank</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            display: none;
+        }
+        .success {
+            color: green;
+            font-size: 16px;
+            display: none;
+        }
+        .timer {
+            font-size: 14px;
+            color: #888;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Create Account</h2>
+    <form id="accountForm">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
+        <div id="usernameError" class="error">Username cannot be empty!</div>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+        <div id="passwordError" class="error">Password must be at least 8 characters long!</div>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+        <div id="emailError" class="error">Email is invalid!</div>
+
+        <button type="submit">Create Account</button>
+    </form>
+
+    <div id="loadingMessage" class="timer">Please wait... Your account is being created (This may take a while).</div>
+    <div id="successMessage" class="success">Your account has been successfully created!</div>
+</div>
+
+<script>
+    const form = document.getElementById('accountForm');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const emailInput = document.getElementById('email');
+
+    const usernameError = document.getElementById('usernameError');
+    const passwordError = document.getElementById('passwordError');
+    const emailError = document.getElementById('emailError');
+
+    const loadingMessage = document.getElementById('loadingMessage');
+    const successMessage = document.getElementById('successMessage');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form from submitting immediately
+
+        // Simulate errors at every step
+        if (!usernameInput.value) {
+            usernameError.style.display = 'block';  // Show username error
+            return;
+        } else {
+            usernameError.style.display = 'none';  // Hide username error
+        }
+
+        if (passwordInput.value.length < 8) {
+            passwordError.style.display = 'block';  // Show password error
+            return;
+        } else {
+            passwordError.style.display = 'none';  // Hide password error
+        }
+
+        if (!emailInput.value.includes('@')) {
+            emailError.style.display = 'block';  // Show email error
+            return;
+        } else {
+            emailError.style.display = 'none';  // Hide email error
+        }
+
+        // If everything is correct, show loading message and hide errors
+        loadingMessage.style.display = 'block';
+        usernameError.style.display = 'none';
+        passwordError.style.display = 'none';
+        emailError.style.display = 'none';
+
+        // Simulate a 2-hour timer for account creation
+        setTimeout(function() {
+            loadingMessage.style.display = 'none'; // Hide loading message
+            successMessage.style.display = 'block'; // Show success message
+        }, 2 * 60 * 60 * 1000); // 2 hours (in milliseconds)
+    });
+</script>
+
+</body>
+</html>
